@@ -3,10 +3,14 @@ set -e +a +m +s +i -f
 
 readonly BIN_DIR="$(/usr/bin/dirname "$0")"
 . "$BIN_DIR/start.stage2.functions"
+readonly BUILDTIME_ENVIRONMENT="$BIN_DIR/buildtime_environment"
 env_list="$(listfromfile "$BIN_DIR/buildtime_environment")"
 readonly NAME="$(var - NAME)"
 readonly CONFIG_FILE="$(var - CONFIG_FILE)"
-readonly CONFIG_DIR="$(/usr/bin/dirname "$CONFIG_FILE")"
+if [ -n "$CONFIG_FILE" ]
+then
+   readonly CONFIG_DIR="$(/usr/bin/dirname "$CONFIG_FILE")"
+fi
 readonly RUNTIME_ENVIRONMENT="$BIN_DIR/runtime_environment"
 if [ -f "$RUNTIME_ENVIRONMENT" ]
 then
@@ -17,3 +21,13 @@ then
 # Image-specific code
 # --------------------------------------------
    readonly env_list
+   echo "HOSTADDR=$(var - HOSTADDR)" >> "$BUILDTIME_ENVIRONMENT"
+   echo "DBNAME=$(var - DBNAME)" >> "$BUILDTIME_ENVIRONMENT"
+   echo "USER=$(var - USER)" >> "$BUILDTIME_ENVIRONMENT"
+   echo "PGPASSFILE=$(makepwfile)" >> "$BUILDTIME_ENVIRONMENT"
+fi
+readonly HOSTADDR="$(var - HOSTADDR)"
+readonly DBNAME="$(var - DBNAME)"
+readonly USER="$(var - DBUSER)"
+readonly PGPASSFILE="$(var - PGPASSFILE)"
+exec /usr/bin/env -i $BIN_DIR/sudo -u $NAME PGPASSFILE="$PGPASSFILE" $BIN_DIR/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER" 
