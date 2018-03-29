@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e +a +m +s +i -f
+
+readonly SUDO_USER
+readonly BIN_DIR="$(/usr/bin/dirname $0)"
+readonly RUNTIME_ENVIRONMENT="$BIN_DIR/runtime_environment"
+if [ -f "$RUNTIME_ENVIRONMENT" ]
+then
+   if [ "$SUDO_USER" != "root" ]
+   then
+      echo "$SUDO_USER $(/bin/hostname)=(root) NOPASSWD: $BIN_DIR/start" > /etc/sudoers.d/docker2
+   fi
+   /usr/bin/env | /bin/grep -i "^REV_" > "$RUNTIME_ENVIRONMENT"
+fi
+exec /usr/bin/env -i "$BIN_DIR/start.stage2"
