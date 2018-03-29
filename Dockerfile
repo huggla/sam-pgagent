@@ -14,8 +14,7 @@ ENV BUILDTIME_ENVIRONMENT="$BIN_DIR/buildtime_environment" \
 
 # Image-specific BEV_CONFIG_FILE variable and other buildtime environment variables.
 # ---------------------------------------------------------------------
-ENV BEV_CONFIG_FILE="$CONFIG_DIR/pgagent.conf" \
-    BEV_PGPASS="$CONFIG_DIR/pgpass"
+
 # ---------------------------------------------------------------------
 
 COPY ./bin ${BIN_DIR}
@@ -25,8 +24,8 @@ COPY ./bin ${BIN_DIR}
 
 # ---------------------------------------------------------------------
     
-RUN env | grep "^BEV_" > "$BUILDTIME_ENVIRONMENT" \
-  ; (getent group $BEV_NAME || addgroup -S $BEV_NAME) \
+RUN (env | grep "^BEV_" > "$BUILDTIME_ENVIRONMENT" || touch "$BUILDTIME_ENVIRONMENT") \
+ && (getent group $BEV_NAME || addgroup -S $BEV_NAME) \
  && (getent passwd $BEV_NAME || adduser -D -S -H -s /bin/false -u 100 -G $BEV_NAME $BEV_NAME) \
  && touch "$RUNTIME_ENVIRONMENT" \
  && apk add --no-cache sudo \
@@ -45,9 +44,6 @@ RUN env | grep "^BEV_" > "$BUILDTIME_ENVIRONMENT" \
 # Image-specific RUN commands.
 # ---------------------------------------------------------------------
 RUN apk --no-cache add libpq wxgtk2.8-base \
- && touch "$BEV_PGPASS" \
- && chown postgres:root "$BEV_PGPASS" \
- && chmod ug=r,o= "$BEV_PGPASS" \
  && chown postgres:postgres "$BIN_DIR/pgagent" \
  && chmod 6555 "$BIN_DIR/pgagent"
 # ---------------------------------------------------------------------
@@ -57,31 +53,9 @@ USER ${BEV_NAME}
 # Image-specific runtime environment variables, prefixed with "REV_".
 # ---------------------------------------------------------------------
 ENV REV_DBNAME="postgres" \
-    REV_DBUSER="postgres"
+    REV_USER="postgres"
 # ---------------------------------------------------------------------
 
 ENV PATH="$BIN_DIR"
 
 CMD ["sudo","start"]
-
-FROM alpine:3.7
-
-COPY ./bin/pgagent /usr/local/bin/pgagent
-
-RUN apk --no-cache add libpq wxgtk2.8-base \
- && mkdir /run/secrets \
- && touch /run/secrets/.pgpass \
- && chown postgres:root /run/secrets/.pgpass \
- && chmod ug=r,o= /run/secrets/.pgpass \
- && chown postgres:postgres /usr/local/bin/pgagent \
- && chmod 6555 /usr/local/bin/pgagent
- 
-ENV PGPASSFILE="/run/secrets/.pgpass" \
-    HOSTADDR="" \
-    DBNAME="postgres" \
-    DBUSER="postgres"
-
-USER nobody
-
-ENTRYPOINT [ "/bin/sh", "-c" ]
-CMD [ "/usr/local/bin/pgagent -f hostaddr=${HOSTADDR} dbname=${DBNAME} user=${USER}" ]
