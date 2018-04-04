@@ -66,10 +66,10 @@ makeallfromenvlist(){
       done
    done
 }
-makepwfile(){
-   if [ -n "$user" ]
+makepwfileforuser(){
+   if [ -n "$1" ]
    then
-      local currentuser="$user"
+      local currentuser="$1"
    else
       local currentuser="$NAME"
    fi
