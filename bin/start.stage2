@@ -3,7 +3,6 @@ set -e +a +m +s +i -f
 
 readonly BIN_DIR="$(/usr/bin/dirname "$0")"
 . "$BIN_DIR/start.stage2.functions"
-readonly BUILDTIME_ENVIRONMENT="$BIN_DIR/buildtime_environment"
 env_list="$(listfromfile "$BIN_DIR/buildtime_environment")"
 readonly NAME="$(var - NAME)"
 readonly CONFIG_FILE="$(var - CONFIG_FILE)"
