@@ -23,7 +23,7 @@ then
    readonly HOSTADDR="$(var - HOSTADDR)"
    readonly DBNAME="$(var - DBNAME)"
    readonly USER="$(var - DBUSER)"
-   readonly PGPASSFILE="$(makepwfileforuser $USER)"
+   readonly PGPASSFILE="$(makepwfileforuser "$USER")"
    echo "HOSTADDR=$HOSTADDR" >> "$BUILDTIME_ENVIRONMENT"
    echo "DBNAME=$DBNAME" >> "$BUILDTIME_ENVIRONMENT"
    echo "USER=$USER" >> "$BUILDTIME_ENVIRONMENT"
