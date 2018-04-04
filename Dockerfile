@@ -46,6 +46,7 @@ RUN chmod go= /bin /sbin /usr/bin /usr/sbin \
  && chmod u=rx,g=rx,o= "$BIN_DIR/"* \
  && ln /usr/bin/sudo "$BIN_DIR/sudo" \
  && chown root:sudoer "$BIN_DIR/sudo" "$BUILDTIME_ENVIRONMENT" "$RUNTIME_ENVIRONMENT" \
+ && chown root:root "$BIN_DIR/start"* \
  && chmod u+s "$BIN_DIR/sudo" \
  && chmod u=rw,g=w,o= "$RUNTIME_ENVIRONMENT" \
  && chmod u=rw,go= "$BUILDTIME_ENVIRONMENT" "$SUDOERS_DIR/docker"*
