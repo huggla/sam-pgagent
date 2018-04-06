@@ -14,17 +14,23 @@ readonly RUNTIME_ENVIRONMENT="$BIN_DIR/runtime_environment"
 if [ -f "$RUNTIME_ENVIRONMENT" ]
 then
    env_list="$env_list"$'\n'"$(listfromfile "$RUNTIME_ENVIRONMENT")"
+   /usr/bin/env
    makeallfromenvlist
    /bin/rm "$RUNTIME_ENVIRONMENT"
 
 # Image-specific code
 # --------------------------------------------
-   readonly env_list
+echo "hej"
+readonly env_list
    readonly HOSTADDR="$(var - HOSTADDR)"
    readonly DBNAME="$(var - DBNAME)"
    readonly USER="$(var - DBUSER)"
+   /usr/bin/env
    readonly PGPASSFILE="$(makepwfileforuser "$USER")"
+   echo "apa"
+   /usr/bin/env
    echo "HOSTADDR=$HOSTADDR" >> "$BUILDTIME_ENVIRONMENT"
+   echo "banan"
    echo "DBNAME=$DBNAME" >> "$BUILDTIME_ENVIRONMENT"
    echo "USER=$USER" >> "$BUILDTIME_ENVIRONMENT"
    echo "PGPASSFILE=$PGPASSFILE" >> "$BUILDTIME_ENVIRONMENT"
