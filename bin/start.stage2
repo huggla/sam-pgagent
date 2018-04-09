@@ -2,19 +2,19 @@
 set -e +a +m +s +i -f
 
 readonly BIN_DIR="$(/usr/bin/dirname "$0")"
+readonly BUILDTIME_ENVIRONMENT="$BIN_DIR/buildtime_environment"
+readonly RUNTIME_ENVIRONMENT="$BIN_DIR/runtime_environment"
 . "$BIN_DIR/start.stage2.functions"
-env_list="$(listfromfile "$BIN_DIR/buildtime_environment")"
+env_list="$(listfromfile "$BUILDTIME_ENVIRONMENT")"
 readonly NAME="$(var - NAME)"
 readonly CONFIG_FILE="$(var - CONFIG_FILE)"
 if [ -n "$CONFIG_FILE" ]
 then
    readonly CONFIG_DIR="$(/usr/bin/dirname "$CONFIG_FILE")"
 fi
-readonly RUNTIME_ENVIRONMENT="$BIN_DIR/runtime_environment"
 if [ -f "$RUNTIME_ENVIRONMENT" ]
 then
    env_list="$env_list"$'\n'"$(listfromfile "$RUNTIME_ENVIRONMENT")"
-   /usr/bin/env
    makeallfromenvlist
    /bin/rm "$RUNTIME_ENVIRONMENT"
 
@@ -22,6 +22,7 @@ then
 # --------------------------------------------
 echo "hej"
 readonly env_list
+$(var - HOSTADDR)
    readonly HOSTADDR="$(var - HOSTADDR)"
    readonly DBNAME="$(var - DBNAME)"
    readonly USER="$(var - DBUSER)"
