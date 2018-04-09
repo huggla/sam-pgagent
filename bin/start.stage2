@@ -20,18 +20,13 @@ then
 
 # Image-specific code
 # --------------------------------------------
-echo "hej"
 readonly env_list
 $(var - HOSTADDR)
    readonly HOSTADDR="$(var - HOSTADDR)"
    readonly DBNAME="$(var - DBNAME)"
    readonly USER="$(var - DBUSER)"
-   /usr/bin/env
    readonly PGPASSFILE="$(makepwfileforuser "$USER")"
-   echo "apa"
-   /usr/bin/env
    echo "HOSTADDR=$HOSTADDR" >> "$BUILDTIME_ENVIRONMENT"
-   echo "banan"
    echo "DBNAME=$DBNAME" >> "$BUILDTIME_ENVIRONMENT"
    echo "USER=$USER" >> "$BUILDTIME_ENVIRONMENT"
    echo "PGPASSFILE=$PGPASSFILE" >> "$BUILDTIME_ENVIRONMENT"
