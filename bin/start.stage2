@@ -20,8 +20,7 @@ then
 
 # Image-specific code
 # --------------------------------------------
-readonly env_list
-$(var - HOSTADDR)
+   readonly env_list
    readonly HOSTADDR="$(var - HOSTADDR)"
    readonly DBNAME="$(var - DBNAME)"
    readonly USER="$(var - DBUSER)"
