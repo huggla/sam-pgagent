@@ -59,6 +59,4 @@ ENV REV_DBNAME="postgres" \
     REV_USER="postgres"
 # ---------------------------------------------------------------------
 
-ENV PATH="$BIN_DIR"
-
 CMD ["sudo","start"]
