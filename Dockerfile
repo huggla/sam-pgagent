@@ -55,7 +55,8 @@ USER sudoer
 
 # Image-specific runtime environment variables.
 # ---------------------------------------------------------------------
-ENV REV_DBNAME="postgres" \
+ENV REV_HOSTADDR="localhost" \
+    REV_DBNAME="postgres" \
     REV_USER="postgres"
 # ---------------------------------------------------------------------
 
