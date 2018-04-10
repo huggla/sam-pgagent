@@ -24,7 +24,7 @@ echo "$env_list"
    readonly env_list
    readonly HOSTADDR="$(var - HOSTADDR)"
    readonly DBNAME="$(var - DBNAME)"
-   readonly USER="$(var - DBUSER)"
+   readonly USER="$(var - USER)"
    readonly PGPASSFILE="$(makepwfileforuser "$USER")"
    echo "HOSTADDR=$HOSTADDR" >> "$BUILDTIME_ENVIRONMENT"
    echo "DBNAME=$DBNAME" >> "$BUILDTIME_ENVIRONMENT"
@@ -36,7 +36,7 @@ echo "$env_list"
 else
    readonly HOSTADDR="$(var - HOSTADDR)"
    readonly DBNAME="$(var - DBNAME)"
-   readonly USER="$(var - DBUSER)"
+   readonly USER="$(var - USER)"
    readonly PGPASSFILE="$(var - PGPASSFILE)"
 fi
 echo "$BIN_DIR/sudo -u $NAME PGPASSFILE=\"$PGPASSFILE\" $BIN_DIR/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER"
