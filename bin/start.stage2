@@ -20,7 +20,6 @@ then
 
 # Image-specific code
 # --------------------------------------------
-echo "$env_list"
    readonly env_list
    readonly HOSTADDR="$(var - HOSTADDR)"
    readonly DBNAME="$(var - DBNAME)"
@@ -31,13 +30,11 @@ echo "$env_list"
    echo "USER=$USER" >> "$BUILDTIME_ENVIRONMENT"
    echo "PGPASSFILE=$PGPASSFILE" >> "$BUILDTIME_ENVIRONMENT"
    /bin/chown postgres:root "$PGPASSFILE"
-   /bin/chmod ug=r,o= "$PGPASSFILE"
-   echo "$PGPASSFILE"
+   /bin/chmod u=r,go= "$PGPASSFILE"
 else
    readonly HOSTADDR="$(var - HOSTADDR)"
    readonly DBNAME="$(var - DBNAME)"
    readonly USER="$(var - USER)"
    readonly PGPASSFILE="$(var - PGPASSFILE)"
 fi
-echo "$BIN_DIR/sudo -u $NAME PGPASSFILE=\"$PGPASSFILE\" $BIN_DIR/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER"
-exec /usr/bin/env -i $BIN_DIR/sudo -u $NAME PGPASSFILE=\"$PGPASSFILE\" $BIN_DIR/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER 
+exec /usr/bin/env -i $BIN_DIR/sudo -u $NAME PGPASSFILE=$PGPASSFILE $BIN_DIR/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER 
