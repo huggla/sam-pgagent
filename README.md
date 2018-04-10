@@ -10,4 +10,4 @@ A docker image with Pgagent, based on Alpine.
 * REV_USER="postgres"
 
 ## Capabilities
-Can drop all but CHOWN, DAC_OVERRIDE, FOWNER, SETGID and SETUID.
+Can drop all but CHOWN, FOWNER, SETGID and SETUID.
