@@ -32,9 +32,13 @@ then
    /bin/chown postgres:root "$PGPASSFILE"
    /bin/chmod u=r,go= "$PGPASSFILE"
 else
+echo "$HOSTADDR"
+echo "hej"
+echo "$env_list"
    readonly HOSTADDR="$(var - HOSTADDR)"
    readonly DBNAME="$(var - DBNAME)"
    readonly USER="$(var - USER)"
    readonly PGPASSFILE="$(var - PGPASSFILE)"
+   echo "/usr/bin/env -i $BIN_DIR/sudo -u $NAME PGPASSFILE=$PGPASSFILE $BIN_DIR/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER"
 fi
 exec /usr/bin/env -i $BIN_DIR/sudo -u $NAME PGPASSFILE=$PGPASSFILE $BIN_DIR/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER 
