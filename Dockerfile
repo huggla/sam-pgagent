@@ -2,7 +2,7 @@ FROM alpine:3.7
 
 # Image-specific BEV_NAME variable.
 # ---------------------------------------------------------------------
-ENV BEV_NAME="pgagent"
+ENV BEV_NAME="postgres"
 # ---------------------------------------------------------------------
 
 ENV BIN_DIR="/usr/local/bin" \
