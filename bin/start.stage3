@@ -1,0 +1,20 @@
+readonly env_list
+if [ "$restart" == "false" ]
+then
+   readonly HOSTADDR="$(var - HOSTADDR)"
+   readonly DBNAME="$(var - DBNAME)"
+   readonly USER="$(var - USER)"
+   readonly PGPASSFILE="$(makepwfileforuser "$USER")"
+   /bin/chown postgres:root "$PGPASSFILE"
+   /bin/chmod u=r,go= "$PGPASSFILE"
+   echo "REV_HOSTADDR=$HOSTADDR" >> "$BUILDTIME_ENVIRONMENT"
+   echo "REV_DBNAME=$DBNAME" >> "$BUILDTIME_ENVIRONMENT"
+   echo "REV_USER=$USER" >> "$BUILDTIME_ENVIRONMENT"
+   echo "REV_PGPASSFILE=$PGPASSFILE" >> "$BUILDTIME_ENVIRONMENT"
+else
+   readonly HOSTADDR="$(var - HOSTADDR)"
+   readonly DBNAME="$(var - DBNAME)"
+   readonly USER="$(var - USER)"
+   readonly PGPASSFILE="$(var - PGPASSFILE)"
+fi
+exec /usr/bin/env -i $BIN_DIR/sudo -u $NAME PGPASSFILE=$PGPASSFILE $BIN_DIR/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER 
