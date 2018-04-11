@@ -1,6 +1,7 @@
 FROM huggla/alpine
 
 ENV REV_NAME="postgres" \
+    REV_HOSTADDR="localhost" \
     REV_DBNAME="postgres" \
     REV_USER="postgres"
 
