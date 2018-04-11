@@ -1,3 +1,12 @@
+# Set in parent script:
+# ---------------------------------------------------------
+# set -e +a +m +s +i +f
+# readonly BIN_DIR="$(/usr/bin/dirname "$0")"
+# readonly RESTART_ENVIRONMENT="/environment/restart_environment"
+# . "$BIN_DIR/start.stage2.functions"
+# readonly NAME="$(var - NAME)"
+# ---------------------------------------------------------
+
 readonly env_list
 if [ "$restart" == "false" ]
 then
@@ -7,10 +16,10 @@ then
    readonly PGPASSFILE="$(makepwfileforuser "$USER")"
    /bin/chown postgres:root "$PGPASSFILE"
    /bin/chmod u=r,go= "$PGPASSFILE"
-   echo "REV_HOSTADDR=$HOSTADDR" >> "$BUILDTIME_ENVIRONMENT"
-   echo "REV_DBNAME=$DBNAME" >> "$BUILDTIME_ENVIRONMENT"
-   echo "REV_USER=$USER" >> "$BUILDTIME_ENVIRONMENT"
-   echo "REV_PGPASSFILE=$PGPASSFILE" >> "$BUILDTIME_ENVIRONMENT"
+   echo "REV_HOSTADDR=$HOSTADDR" >> "$RESTART_ENVIRONMENT"
+   echo "REV_DBNAME=$DBNAME" >> "$RESTART_ENVIRONMENT"
+   echo "REV_USER=$USER" >> "$RESTART_ENVIRONMENT"
+   echo "REV_PGPASSFILE=$PGPASSFILE" >> "$RESTART_ENVIRONMENT"
 else
    readonly HOSTADDR="$(var - HOSTADDR)"
    readonly DBNAME="$(var - DBNAME)"
