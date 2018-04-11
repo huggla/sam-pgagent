@@ -1,6 +1,6 @@
 FROM huggla/alpine
 
-ENV REV_NAME="pgagent" \
+ENV REV_NAME="postgres" \
     REV_DBNAME="postgres" \
     REV_USER="postgres"
 
