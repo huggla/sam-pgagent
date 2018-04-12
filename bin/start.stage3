@@ -26,4 +26,4 @@ else
    readonly USER="$(var - USER)"
    readonly PGPASSFILE="$(var - PGPASSFILE)"
 fi
-exec /usr/bin/env -i $BIN_DIR/sudo -u $NAME PGPASSFILE=$PGPASSFILE $BIN_DIR/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER 
+exec /usr/bin/env -i /bin/sudo -u $NAME PGPASSFILE=$PGPASSFILE $BIN_DIR/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER 
