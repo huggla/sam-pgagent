@@ -5,8 +5,10 @@ ENV REV_NAME="postgres" \
     REV_DBNAME="postgres" \
     REV_USER="postgres"
 
-COPY ./bin /usr/local/bin
+COPY ./bin/pgagent ${BIN_DIR}/pgagent
 
-RUN apk --no-cache add libpq wxgtk2.8-base
+RUN apk --no-cache add libpq wxgtk2.8-base \
+ && chown root:$REV_NAME "$BIN_DIR/pgagent" \
+ && chmod g=rx,uo= "$BIN_DIR/pgagent"
     
 USER sudoer
