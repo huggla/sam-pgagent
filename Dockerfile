@@ -5,7 +5,7 @@ ENV REV_NAME="postgres" \
     REV_DBNAME="postgres" \
     REV_USER="postgres"
 
-COPY ./bin ${BIN_DIR}
+COPY ./bin /usr/local/bin
 
 RUN apk --no-cache add libpq wxgtk2.8-base
     
