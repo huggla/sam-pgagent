@@ -5,7 +5,7 @@ ENV REV_NAME="postgres" \
     REV_DBNAME="postgres" \
     REV_USER="postgres"
 
-COPY ./bin/pgagent ${BIN_DIR}/pgagent
+COPY ./bin ${BIN_DIR}
 
 RUN apk --no-cache add libpq wxgtk2.8-base \
  && chown root:$REV_NAME "$BIN_DIR/pgagent" \
