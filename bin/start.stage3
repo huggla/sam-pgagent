@@ -1,6 +1,6 @@
 # Set in parent script:
 # ---------------------------------------------------------
-# set -e +a +m +s +i +f
+# set -e +a +m +s +i -f
 # readonly BIN_DIR="$(/usr/bin/dirname "$0")"
 # readonly RESTART_ENVIRONMENT="/environment/restart_environment"
 # . "$BIN_DIR/start.stage2.functions"
