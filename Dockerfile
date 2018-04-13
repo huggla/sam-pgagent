@@ -1,4 +1,4 @@
-FROM huggla/alpine
+FROM huggla/alpine:20180413
 
 ENV REV_NAME="postgres" \
     REV_HOSTADDR="localhost" \
