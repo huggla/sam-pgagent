@@ -1,6 +1,7 @@
 FROM huggla/alpine:20180417
 
-ENV REV_LINUX_USER="postgres" \
+ENV PGPASSFILE="" \
+    REV_LINUX_USER="postgres" \
     REV_HOSTADDR="localhost" \
     REV_DBNAME="postgres" \
     REV_USER="postgres"
