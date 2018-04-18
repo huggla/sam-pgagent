@@ -10,5 +10,3 @@ COPY ./bin ${BIN_DIR}
 RUN apk --no-cache add libpq wxgtk2.8-base
     
 USER sudoer
-
-ENV PGPASSFILE=""
