@@ -1,7 +1,6 @@
 FROM huggla/alpine:20180417
 
-ENV PGPASSFILE="" \
-    REV_LINUX_USER="postgres" \
+ENV REV_LINUX_USER="postgres" \
     REV_HOSTADDR="localhost" \
     REV_DBNAME="postgres" \
     REV_USER="postgres"
@@ -11,3 +10,5 @@ COPY ./bin ${BIN_DIR}
 RUN apk --no-cache add libpq wxgtk2.8-base
     
 USER sudoer
+
+ENV PGPASSFILE=""
