@@ -27,4 +27,8 @@ else
    readonly USER="$(var - USER)"
    readonly PGPASSFILE="$(var - PGPASSFILE)"
 fi
+if [ -f "$BIN_DIR/start.stage4" ]
+then
+   . "$BIN_DIR/start.stage4"
+fi
 exec /usr/bin/env -i /usr/local/sbin/sudo -u $LINUX_USER PGPASSFILE=$PGPASSFILE $BIN_DIR/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER 
