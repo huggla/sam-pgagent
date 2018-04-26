@@ -8,11 +8,11 @@
 # ---------------------------------------------------------
 
 readonly env_list
+readonly HOSTADDR="$(var - HOSTADDR)"
+readonly DBNAME="$(var - DBNAME)"
+readonly USER="$(var - USER)"
 if [ "$restart" == "false" ]
 then
-   readonly HOSTADDR="$(var - HOSTADDR)"
-   readonly DBNAME="$(var - DBNAME)"
-   readonly USER="$(var - USER)"
    readonly PGPASSFILE="$(makepwfileforuser "$USER")"
    /bin/chown postgres:root "$PGPASSFILE"
    /bin/chmod u=r,go= "$PGPASSFILE"
@@ -24,9 +24,6 @@ then
    } >> "$RESTART_ENVIRONMENT"
    echo 'Defaults env_keep = "PGPASSFILE"' >> "/etc/sudoers.d/docker2"
 else
-   readonly HOSTADDR="$(var - HOSTADDR)"
-   readonly DBNAME="$(var - DBNAME)"
-   readonly USER="$(var - USER)"
    readonly PGPASSFILE="$(var - PGPASSFILE)"
 fi
 if [ -f "$BIN_DIR/start.stage4" ]
