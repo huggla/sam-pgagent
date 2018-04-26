@@ -16,10 +16,12 @@ then
    readonly PGPASSFILE="$(makepwfileforuser "$USER")"
    /bin/chown postgres:root "$PGPASSFILE"
    /bin/chmod u=r,go= "$PGPASSFILE"
-   echo "REV_HOSTADDR=$HOSTADDR" >> "$RESTART_ENVIRONMENT"
-   echo "REV_DBNAME=$DBNAME" >> "$RESTART_ENVIRONMENT"
-   echo "REV_USER=$USER" >> "$RESTART_ENVIRONMENT"
-   echo "REV_PGPASSFILE=$PGPASSFILE" >> "$RESTART_ENVIRONMENT"
+   {
+      echo "REV_HOSTADDR=$HOSTADDR"
+      echo "REV_DBNAME=$DBNAME"
+      echo "REV_USER=$USER"
+      echo "REV_PGPASSFILE=$PGPASSFILE"
+   } > "$RESTART_ENVIRONMENT"
    echo 'Defaults env_keep = "PGPASSFILE"' >> "/etc/sudoers.d/docker2"
 else
    readonly HOSTADDR="$(var - HOSTADDR)"
