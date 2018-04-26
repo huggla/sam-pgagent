@@ -21,7 +21,7 @@ then
       echo "REV_DBNAME=$DBNAME"
       echo "REV_USER=$USER"
       echo "REV_PGPASSFILE=$PGPASSFILE"
-   } > "$RESTART_ENVIRONMENT"
+   } >> "$RESTART_ENVIRONMENT"
    echo 'Defaults env_keep = "PGPASSFILE"' >> "/etc/sudoers.d/docker2"
 else
    readonly HOSTADDR="$(var - HOSTADDR)"
