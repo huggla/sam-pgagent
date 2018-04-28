@@ -1,5 +1,7 @@
 FROM huggla/alpine
 
+USER root
+
 ENV REV_LINUX_USER="postgres" \
     REV_HOSTADDR="localhost" \
     REV_DBNAME="postgres" \
