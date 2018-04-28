@@ -2,10 +2,10 @@ FROM huggla/alpine
 
 USER root
 
-ENV REV_LINUX_USER="postgres" \
-    REV_HOSTADDR="localhost" \
-    REV_DBNAME="postgres" \
-    REV_USER="postgres"
+ENV VAR_LINUX_USER="postgres" \
+    VAR_HOSTADDR="localhost" \
+    VAR_DBNAME="postgres" \
+    VAR_USER="postgres"
 
 COPY ./bin ${bin_dir}
 
