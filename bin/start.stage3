@@ -1,9 +1,9 @@
 # Set in parent script:
 # ---------------------------------------------------------
 # set -e +a +m +s +i -f
-# readonly BIN_DIR="$(/usr/bin/dirname "$0")"
-# readonly RESTART_ENVIRONMENT="/environment/restart_environment"
-# . "$BIN_DIR/start.stage2.functions"
+# readonly bin_dir="$(/usr/bin/dirname "$0")"
+# readonly restart_environment="/environment/restart_environment"
+# . "$bin_dir/start.stage2.functions"
 # readonly LINUX_USER="$(var - LINUX_USER)"
 # ---------------------------------------------------------
 
@@ -21,13 +21,13 @@ then
       echo "REV_DBNAME=$DBNAME"
       echo "REV_USER=$USER"
       echo "REV_PGPASSFILE=$PGPASSFILE"
-   } >> "$RESTART_ENVIRONMENT"
+   } >> "$restart_environment"
    echo 'Defaults env_keep = "PGPASSFILE"' >> "/etc/sudoers.d/docker2"
 else
    readonly PGPASSFILE="$(var - PGPASSFILE)"
 fi
-if [ -f "$BIN_DIR/start.stage4" ]
+if [ -f "$bin_dir/start.stage4" ]
 then
-   . "$BIN_DIR/start.stage4"
+   . "$bin_dir/start.stage4"
 fi
-exec /usr/bin/env -i /usr/local/sbin/sudo -u $LINUX_USER PGPASSFILE=$PGPASSFILE $BIN_DIR/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER 
+exec /usr/bin/env -i /usr/local/sbin/sudo -u $LINUX_USER PGPASSFILE=$PGPASSFILE $bin_dir/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER 
