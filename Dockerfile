@@ -7,8 +7,8 @@ ENV VAR_LINUX_USER="postgres" \
     VAR_DBNAME="postgres" \
     VAR_USER="postgres"
 
-COPY ./bin ${bin_dir}
+COPY ./start /start
 
 RUN apk --no-cache add libpq wxgtk2.8-base
     
-USER sudoer
+USER starter
