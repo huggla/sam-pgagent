@@ -10,6 +10,8 @@ ENV VAR_LINUX_USER="postgres" \
 COPY ./start /start
 COPY ./bin/pgagent /usr/local/bin/pgagent
 
-RUN apk --no-cache add libpq wxgtk2.8-base
+RUN apk --no-cache add libpq wxgtk2.8-base \
+ && chown root:$VAR_LINUX_USER /usr/local/bin/pgagent \
+ && chmod ug=rx,o= /usr/local/bin/pgagent
     
 USER starter
