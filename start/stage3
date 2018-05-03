@@ -1,19 +1,15 @@
-# Set in stage2:
+# Passed from stage2:
 # ---------------------------------------------------------
 # set -e +a +m +s +i -f
 # . /start/common.functions
 # . /start/stage2.functions
-# readonly ifs_bak=$IFS
+# firstrun
 # ---------------------------------------------------------
 
-
-if [ "$(isFirstrun)" == "true" ]
+if [ "$firstrun" == "true" ]
 then
-echo firstrun
    /bin/chown :$VAR_LINUX_USER /usr/local/bin/pgagent
    VAR_PGPASSFILE="$(makepwfileforuser "$VAR_USER")"
    /bin/chown $VAR_LINUX_USER:root "$VAR_PGPASSFILE"
    /bin/chmod u=r,go= "$VAR_PGPASSFILE"
-else
-echo restart
 fi
