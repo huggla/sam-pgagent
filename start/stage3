@@ -1,33 +1,15 @@
-# Set in parent script:
+# Set in stage2:
 # ---------------------------------------------------------
 # set -e +a +m +s +i -f
-# readonly bin_dir="$(/usr/bin/dirname "$0")"
-# readonly restart_environment="/environment/restart_environment"
-# . "$bin_dir/start.stage2.functions"
-# readonly LINUX_USER="$(var - LINUX_USER)"
+# . /start/common.functions
+# . /start/stage2.functions
+# readonly ifs_bak=$IFS
 # ---------------------------------------------------------
 
-readonly env_list
-readonly HOSTADDR="$(var - HOSTADDR)"
-readonly DBNAME="$(var - DBNAME)"
-readonly USER="$(var - USER)"
-if [ "$restart" == "false" ]
+
+if [ "$(isFirstrun)" == "true" ]
 then
-   readonly PGPASSFILE="$(makepwfileforuser "$USER")"
-   /bin/chown postgres:root "$PGPASSFILE"
-   /bin/chmod u=r,go= "$PGPASSFILE"
-   {
-      echo "REV_HOSTADDR=$HOSTADDR"
-      echo "REV_DBNAME=$DBNAME"
-      echo "REV_USER=$USER"
-      echo "REV_PGPASSFILE=$PGPASSFILE"
-   } >> "$restart_environment"
-   echo 'Defaults env_keep = "PGPASSFILE"' >> "/etc/sudoers.d/docker2"
-else
-   readonly PGPASSFILE="$(var - PGPASSFILE)"
+   VAR_PGPASSFILE="$(makepwfileforuser "$VAR_USER")"
+   /bin/chown $VAR_LINUX_USER:root "$VAR_PGPASSFILE"
+   /bin/chmod u=r,go= "$VAR_PGPASSFILE"
 fi
-if [ -f "$bin_dir/start.stage4" ]
-then
-   . "$bin_dir/start.stage4"
-fi
-exec /usr/bin/env -i /usr/local/sbin/sudo -u $LINUX_USER PGPASSFILE=$PGPASSFILE $bin_dir/pgagent -f hostaddr=$HOSTADDR dbname=$DBNAME user=$USER 
