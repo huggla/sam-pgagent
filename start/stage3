@@ -9,8 +9,11 @@
 
 if [ "$(isFirstrun)" == "true" ]
 then
+echo firstrun
    /bin/chown :$VAR_LINUX_USER /usr/local/bin/pgagent
    VAR_PGPASSFILE="$(makepwfileforuser "$VAR_USER")"
    /bin/chown $VAR_LINUX_USER:root "$VAR_PGPASSFILE"
    /bin/chmod u=r,go= "$VAR_PGPASSFILE"
+else
+echo restart
 fi
