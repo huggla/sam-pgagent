@@ -5,8 +5,7 @@ USER root
 COPY ./start /start
 COPY ./bin/pgagent /usr/local/bin/pgagent
 
-RUN apk --no-cache add libpq wxgtk2.8-base \
- && chmod ug=rx,o= /usr/local/bin/pgagent
+RUN apk --no-cache add libpq wxgtk2.8-base
  
 ENV VAR_LINUX_USER="postgres" \
     VAR_HOSTADDR="localhost" \
