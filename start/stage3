@@ -8,6 +8,5 @@
 
 if [ "$firstrun" == "true" ]
 then
-   /bin/chown :$VAR_LINUX_USER /usr/local/bin/pgagent
    VAR_PGPASSFILE="$(makePwFileForUser "$VAR_USER")"
 fi
