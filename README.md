@@ -9,7 +9,7 @@ A docker image with Pgagent, based on huggla/alpine (improved security).
 * VAR_DBNAME="postgres"
 * VAR_USER="postgres"
 * VAR_LINUX_USER="postgres"
-* VAR_FINAL_COMMAND=
+* VAR_FINAL_COMMAND="PGPASSFILE=\$VAR_PGPASSFILE /usr/local/bin/pgagent -f hostaddr=\$VAR_HOSTADDR dbname=\$VAR_DBNAME user=\$VAR_USER"
 * VAR_ARGON2_PARAMS="-r" (only used if VAR_ENCRYPT_PW is set to "yes")
 * VAR_SALT_FILE="/proc/sys/kernel/hostname" (only used if VAR_ENCRYPT_PW is set to "yes")
 
