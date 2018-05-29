@@ -1,4 +1,4 @@
-FROM huggla/alpine
+FROM huggla/alpine:20180529
 
 USER root
 
