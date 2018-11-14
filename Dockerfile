@@ -1,35 +1,26 @@
-FROM alpine:edge
+ARG TAG="20181113-edge"
+ARG CONTENTIMAGE1="huggla/pgagent:$TAG"
+ARG CONTENTSOURCE1="/pgagent/usr/local/bin/pgagent"
+ARG CONTENTDESTINATION1="/usr/bin/pgagent"
+ARG RUNDEPS="libpq"
+ARG EXECUTABLES="/usr/bin/pgagent"
 
-RUN apk add --virtual .build-dependencies alpine-sdk subversion \
- && adduser -D -G abuild abuilder \
- && mkdir -p /var/cache/distfiles /abuild /pgagent-apks \
- && chgrp abuild /var/cache/distfiles /abuild \
- && chmod g+w /var/cache/distfiles /abuild
- 
-USER abuilder
- 
-RUN cd /abuild \
- && abuild-keygen -a -i -n \
- && svn export https://github.com/alpinelinux/aports.git/3.4-stable/testing/pgagent
-#&& svn export https://github.com/alpinelinux/aports.git/trunk/main/mariadb
-#https://github.com/atenart/alpine-aports/blob/master/testing/pgagent/APKBUILD
-#https://github.com/alpinelinux/aports/tree/3.4-stable/testing/pgagent
-#https://github.com/alpinelinux/aports.git
-#https://github.com/alpinelinux/aports/tree/master/main
+#---------------Don't edit----------------
+FROM ${CONTENTIMAGE1:-scratch} as content1
+FROM ${CONTENTIMAGE2:-scratch} as content2
+FROM ${BASEIMAGE:-huggla/base:$TAG} as base
+FROM huggla/build:$TAG as build
+FROM ${BASEIMAGE:-huggla/base:$TAG} as image
+COPY --from=build /imagefs /
+#-----------------------------------------
 
-#FROM huggla/alpine
+ENV VAR_LINUX_USER="postgres" \
+    VAR_HOSTADDR="localhost" \
+    VAR_DBNAME="postgres" \
+    VAR_USER="postgres" \
+    VAR_FINAL_COMMAND="PGPASSFILE=\$VAR_PGPASSFILE /usr/local/bin/pgagent -f hostaddr=\$VAR_HOSTADDR dbname=\$VAR_DBNAME user=\$VAR_USER" 
 
-#USER root
-
-#COPY ./start /start
-#COPY ./bin/pgagent /usr/local/bin/pgagent
-
-#RUN apk --no-cache add libpq wxgtk2.8-base
- 
-#ENV VAR_LINUX_USER="postgres" \
-#    VAR_HOSTADDR="localhost" \
-#    VAR_DBNAME="postgres" \
-#    VAR_USER="postgres" \
-#    VAR_FINAL_COMMAND="PGPASSFILE=\$VAR_PGPASSFILE /usr/local/bin/pgagent -f hostaddr=\$VAR_HOSTADDR dbname=\$VAR_DBNAME user=\$VAR_USER" 
-    
-#USER starter
+#---------------Don't edit----------------
+USER starter
+ONBUILD USER root
+#-----------------------------------------
