@@ -9,5 +9,5 @@
 if [ "$isFirstRun" == "true" ]
 then
    VAR_PGPASSFILE="$(makePwFileForUser "$VAR_USER")"
-   /bin/chmod g+r "$VAR_PGPASSFILE"
+   /bin/chown $VAR_LINUX_USER "$VAR_PGPASSFILE"
 fi
