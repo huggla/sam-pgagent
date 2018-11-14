@@ -18,7 +18,8 @@ ENV VAR_LINUX_USER="postgres" \
     VAR_HOSTADDR="localhost" \
     VAR_DBNAME="postgres" \
     VAR_USER="postgres" \
-    VAR_FINAL_COMMAND="PGPASSFILE=\$VAR_PGPASSFILE /usr/local/bin/pgagent -f hostaddr=\$VAR_HOSTADDR dbname=\$VAR_DBNAME user=\$VAR_USER" 
+    VAR_FINAL_COMMAND="PGPASSFILE=\$VAR_PGPASSFILE /usr/local/bin/pgagent -f hostaddr=\$VAR_HOSTADDR dbname=\$VAR_DBNAME user=\$VAR_USER" \
+    VAR_INIT_CAPS="cap_chown"
 
 #---------------Don't edit----------------
 USER starter
