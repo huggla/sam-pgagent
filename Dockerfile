@@ -2,7 +2,7 @@ ARG TAG="20181113-edge"
 ARG CONTENTIMAGE1="huggla/pgagent:$TAG"
 ARG CONTENTSOURCE1="/pgagent/usr/bin/pgagent"
 ARG CONTENTDESTINATION1="/usr/bin/pgagent"
-ARG RUNDEPS="libpq"
+ARG RUNDEPS="libpq boost"
 ARG EXECUTABLES="/usr/bin/pgagent"
 
 #---------------Don't edit----------------
