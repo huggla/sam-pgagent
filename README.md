@@ -19,4 +19,4 @@ A docker image with Pgagent.
 * VAR_ENCRYPT_PW (set to "yes" to hash password with Argon2)
 
 ## Capabilities
-Can drop all but SETPCAP, SETGID and SETUID.
+Can drop all but CHOWN, SETPCAP, SETGID and SETUID.
