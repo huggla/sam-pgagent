@@ -1,5 +1,4 @@
 ARG TAG="20181113-edge"
-ARG BASEIMAGE="huggla/base:latest"
 ARG CONTENTIMAGE1="huggla/pgagent:$TAG"
 ARG CONTENTSOURCE1="/pgagent/usr/bin/pgagent"
 ARG CONTENTDESTINATION1="/usr/bin/pgagent"
