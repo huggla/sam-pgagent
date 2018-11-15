@@ -8,5 +8,8 @@
 
 if [ "$isFirstRun" == "true" ]
 then
-   VAR_PGPASSFILE="$(makePwFileForUser "$VAR_USER" owner)"
+   if [ -z "$VAR_PGPASSFILE" ] || [ ! -s "$VAR_PGPASSFILE" ]
+   then
+      VAR_PGPASSFILE="$(makePwFileForUser "$VAR_USER" owner)"
+   fi
 fi
