@@ -1,10 +1,9 @@
-# Passed from stage2:
+# Set in stage2:
 # ---------------------------------------------------------
 # set -e +a +m +s +i -f
-# . /start/stage2.functions
 # isFirstRun
 # VAR_*
-# ---------------------------------------------------------
+# All functions in /start/functions
 
 if [ "$isFirstRun" == "true" ]
 then
