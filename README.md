@@ -9,7 +9,7 @@ A docker image with Pgagent.
 * VAR_DBNAME="postgres"
 * VAR_USER="postgres"
 * VAR_LINUX_USER="postgres"
-* VAR_FINAL_COMMAND="PGPASSFILE=\$VAR_PGPASSFILE /usr/local/bin/pgagent -f hostaddr=\$VAR_HOSTADDR dbname=\$VAR_DBNAME user=\$VAR_USER"
+* VAR_FINAL_COMMAND="PGPASSFILE=\$VAR_PGPASSFILE /usr/local/bin/pgagent -f host=\$VAR_HOSTADDR dbname=\$VAR_DBNAME user=\$VAR_USER"
 * VAR_ARGON2_PARAMS="-r" (only used if VAR_ENCRYPT_PW is set to "yes")
 * VAR_SALT_FILE="/proc/sys/kernel/hostname" (only used if VAR_ENCRYPT_PW is set to "yes")
 
@@ -19,4 +19,4 @@ A docker image with Pgagent.
 * VAR_ENCRYPT_PW (set to "yes" to hash password with Argon2)
 
 ## Capabilities
-Can drop all but CHOWN, SETPCAP, SETGID and SETUID.
+Can drop all but SETPCAP, SETGID and SETUID.
