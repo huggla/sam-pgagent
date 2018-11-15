@@ -1,4 +1,5 @@
 ARG TAG="20181113-edge"
+ARG BASEIMAGE="huggla/base:latest"
 ARG CONTENTIMAGE1="huggla/pgagent:$TAG"
 ARG CONTENTSOURCE1="/pgagent/usr/bin/pgagent"
 ARG CONTENTDESTINATION1="/usr/bin/pgagent"
@@ -18,8 +19,7 @@ ENV VAR_LINUX_USER="postgres" \
     VAR_HOSTADDR="localhost" \
     VAR_DBNAME="postgres" \
     VAR_USER="postgres" \
-    VAR_FINAL_COMMAND="PGPASSFILE=\$VAR_PGPASSFILE /usr/local/bin/pgagent -f hostaddr=\$VAR_HOSTADDR dbname=\$VAR_DBNAME user=\$VAR_USER" \
-    VAR_INIT_CAPS="cap_chown"
+    VAR_FINAL_COMMAND="PGPASSFILE=\$VAR_PGPASSFILE /usr/local/bin/pgagent -f hostaddr=\$VAR_HOSTADDR dbname=\$VAR_DBNAME user=\$VAR_USER"
 
 #---------------Don't edit----------------
 USER starter
