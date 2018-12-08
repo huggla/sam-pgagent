@@ -1,7 +1,7 @@
-**Note! I use Docker latest tag for development, which means that it isn't allways working. Date tags are stable.**
-
 # pgagent-alpine
 A docker image with Pgagent.
+
+20181204: Pgagent 4.0, Alpine Edge
 
 ## Environment variables
 ### pre-set runtime variables.
