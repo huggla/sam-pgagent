@@ -20,3 +20,6 @@ A docker image with Pgagent.
 
 ## Capabilities
 Can drop all but SETPCAP, SETGID and SETUID.
+
+## Tips
+Check also out huggla/postgres-alpine, huggla/pgadmin-alpine, huggla/pgbouncer-alpine and huggla/postgres-backup.
