@@ -1,7 +1,7 @@
 # pgagent-alpine
 A docker image with Pgagent.
 
-20181204-20190129: Pgagent 4.0, Alpine Edge
+20181204-20190206: Pgagent 4.0, Alpine Edge
 
 ## Environment variables
 ### pre-set runtime variables.
