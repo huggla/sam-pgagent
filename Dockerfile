@@ -1,4 +1,4 @@
-ARG TAG="20190206"
+ARG TAG="20190220"
 ARG CONTENTIMAGE1="huggla/pgagent:$TAG"
 ARG CONTENTSOURCE1="/pgagent/usr/bin/pgagent"
 ARG CONTENTDESTINATION1="/buildfs/usr/bin/pgagent"
