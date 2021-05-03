@@ -5,8 +5,8 @@
 # Init
 # =========================================================================
 # ARGs (can be passed to Build/Final) <BEGIN>
-ARG SaM_VERSION="2.0.4"
-ARG PGAGENT_VERSION="4.0.0"
+ARG SaM_VERSION="2.0.5"
+ARG PGAGENT_VERSION="4.2.1"
 ARG CONTENTIMAGE1="huggla/sam-content:pgagent-$PGAGENT_VERSION"
 ARG CONTENTSOURCE1="/content-app/usr/bin/pgagent"
 ARG CONTENTDESTINATION1="/finalfs/usr/bin/pgagent"
