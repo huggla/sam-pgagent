@@ -10,7 +10,7 @@ ARG PGAGENT_VERSION="4.0.0"
 ARG CONTENTIMAGE1="huggla/sam-content:pgagent-$PGAGENT_VERSION"
 ARG CONTENTSOURCE1="/content-app/usr/bin/pgagent"
 ARG CONTENTDESTINATION1="/finalfs/usr/bin/pgagent"
-ARG RUNDEPS="libpq boost"
+ARG RUNDEPS="libpq boost1.76"
 ARG STARTUPEXECUTABLES="/usr/bin/pgagent"
 # ARGs (can be passed to Build/Final) </END>
 
